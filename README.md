@@ -19,8 +19,8 @@ Users can select a topic, answer a set of multiple-choice questions, and receive
 - JavaScript
 
 ## 📺 Demo Video
-👉 *[Link to your YouTube video will go here]*
-
+Watch the video demonstration here:  
+👉 (https://youtu.be/u6FHFjpEu_g)
 ## 🧠 Author
 Created by **Hssin** as part of the final project for CS50x.
 
