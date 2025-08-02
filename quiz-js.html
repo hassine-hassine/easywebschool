@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz - EasyWebSchool - JavaScript</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body  id="quizJSPage">
+  <header>
+    <h1><span> EasyWebSchool Quiz - JavaScript</span></h1>
+  </header>
+
+  <main>
+    <!-- Question 1 -->
+    <div id="q1" class="question active">
+      <h3>What is the correct syntax to print a message in the console?</h3>
+      <input type="radio" name="question1" id="q1o1" value="console.log()">
+      <label for="q1o1">console.log()</label><br>
+      <input type="radio" name="question1" id="q1o2" value="print()">
+      <label for="q1o2">print()</label><br>
+      <input type="radio" name="question1" id="q1o3" value="echo()">
+      <label for="q1o3">echo()</label><br>
+      <input type="radio" name="question1" id="q1o4" value="console.print()">
+      <label for="q1o4">console.print()</label><br>
+      <button class="submit-btn">Submit</button>
+    </div>
+
+    <!-- Question 2 -->
+    <div id="q2" class="question">
+      <h3>Which keyword is used to declare a variable in JavaScript?</h3>
+      <input type="radio" name="question2" id="q2o1" value="var">
+      <label for="q2o1">var</label><br>
+      <input type="radio" name="question2" id="q2o2" value="let">
+      <label for="q2o2">let</label><br>
+      <input type="radio" name="question2" id="q2o3" value="const">
+      <label for="q2o3">const</label><br>
+      <input type="radio" name="question2" id="q2o4" value="All of the above">
+      <label for="q2o4">All of the above</label><br>
+      <button class="submit-btn">Submit</button>
+    </div>
+
+    <!-- Question 3 -->
+    <div id="q3" class="question">
+      <h3>Which method converts a JSON string to a JavaScript object?</h3>
+      <input type="radio" name="question3" id="q3o1" value="JSON.parse()">
+      <label for="q3o1">JSON.parse()</label><br>
+      <input type="radio" name="question3" id="q3o2" value="JSON.stringify()">
+      <label for="q3o2">JSON.stringify()</label><br>
+      <input type="radio" name="question3" id="q3o3" value="JSON.toObject()">
+      <label for="q3o3">JSON.toObject()</label><br>
+      <input type="radio" name="question3" id="q3o4" value="parseJSON()">
+      <label for="q3o4">parseJSON()</label><br>
+      <button class="submit-btn">Submit</button>
+    </div>
+
+    <!-- Question 4 -->
+    <div id="q4" class="question">
+      <h3>How do you write a function in JavaScript?</h3>
+      <input type="radio" name="question4" id="q4o1" value="function myFunction()">
+      <label for="q4o1">function myFunction()</label><br>
+      <input type="radio" name="question4" id="q4o2" value="func myFunction()">
+      <label for="q4o2">func myFunction()</label><br>
+      <input type="radio" name="question4" id="q4o3" value="function:myFunction()">
+      <label for="q4o3">function:myFunction()</label><br>
+      <input type="radio" name="question4" id="q4o4" value="function = myFunction()">
+      <label for="q4o4">function = myFunction()</label><br>
+      <button class="submit-btn">Submit</button>
+    </div>
+
+    <!-- Question 5 -->
+    <div id="q5" class="question">
+      <h3>How do you write a comment in JavaScript?</h3>
+      <input type="radio" name="question5" id="q5o1" value="// This is a comment">
+      <label for="q5o1">// This is a comment</label><br>
+      <input type="radio" name="question5" id="q5o2" value="<!-- This is a comment -->">
+      <label for="q5o2">&lt;!-- This is a comment --&gt;</label><br>
+      <input type="radio" name="question5" id="q5o3" value="# This is a comment">
+      <label for="q5o3"># This is a comment</label><br>
+      <input type="radio" name="question5" id="q5o4" value="/* This is a comment */">
+      <label for="q5o4">/* This is a comment */</label><br>
+      <button class="submit-btn">Submit</button>
+    </div>
+
+    <!-- Question 6 -->
+    <div id="q6" class="question">
+      <h3>Which operator is used to assign a value?</h3>
+      <input type="radio" name="question6" id="q6o1" value="=">
+      <label for="q6o1">=</label><br>
+      <input type="radio" name="question6" id="q6o2" value="==">
+      <label for="q6o2">==</label><br>
+      <input type="radio" name="question6" id="q6o3" value="===">
+      <label for="q6o3">===</label><br>
+      <input type="radio" name="question6" id="q6o4" value="+=">
+      <label for="q6o4">+=</label><br>
+      <button class="submit-btn">Submit</button>
+    </div>
+
+    <!-- Question 7 -->
+    <div id="q7" class="question">
+      <h3>What will the following code output? <code>console.log(typeof NaN);</code></h3>
+      <input type="radio" name="question7" id="q7o1" value="number">
+      <label for="q7o1">number</label><br>
+      <input type="radio" name="question7" id="q7o2" value="NaN">
+      <label for="q7o2">NaN</label><br>
+      <input type="radio" name="question7" id="q7o3" value="undefined">
+      <label for="q7o3">undefined</label><br>
+      <input type="radio" name="question7" id="q7o4" value="object">
+      <label for="q7o4">object</label><br>
+      <button class="submit-btn">Submit</button>
+    </div>
+
+    <!-- Question 8 -->
+    <div id="q8" class="question">
+      <h3>How do you declare an array in JavaScript?</h3>
+      <input type="radio" name="question8" id="q8o1" value="var arr = [];">
+      <label for="q8o1">var arr = [];</label><br>
+      <input type="radio" name="question8" id="q8o2" value="var arr = {};">
+      <label for="q8o2">var arr = {};</label><br>
+      <input type="radio" name="question8" id="q8o3" value="array arr = [];">
+      <label for="q8o3">array arr = [];</label><br>
+      <input type="radio" name="question8" id="q8o4" value="var arr = array();">
+      <label for="q8o4">var arr = array();</label><br>
+      <button class="submit-btn">Submit</button>
+    </div>
+
+    <!-- Question 9 -->
+    <div id="q9" class="question">
+      <h3>Which method adds a new element to the end of an array?</h3>
+      <input type="radio" name="question9" id="q9o1" value="push()">
+      <label for="q9o1">push()</label><br>
+      <input type="radio" name="question9" id="q9o2" value="pop()">
+      <label for="q9o2">pop()</label><br>
+      <input type="radio" name="question9" id="q9o3" value="shift()">
+      <label for="q9o3">shift()</label><br>
+      <input type="radio" name="question9" id="q9o4" value="unshift()">
+      <label for="q9o4">unshift()</label><br>
+      <button class="submit-btn">Submit</button>
+    </div>
+
+    <!-- Question 10 -->
+    <div id="q10" class="question">
+      <h3>Which of the following is a JavaScript data type?</h3>
+      <input type="radio" name="question10" id="q10o1" value="Boolean">
+      <label for="q10o1">Boolean</label><br>
+      <input type="radio" name="question10" id="q10o2" value="Float">
+      <label for="q10o2">Float</label><br>
+      <input type="radio" name="question10" id="q10o3" value="Character">
+      <label for="q10o3">Character</label><br>
+      <input type="radio" name="question10" id="q10o4" value="String">
+      <label for="q10o4">String</label><br>
+      <button class="submit-btn">Finish</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
