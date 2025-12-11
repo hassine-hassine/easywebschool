@@ -1,3 +1,4 @@
+// --- Correct Answers ---
 const correctAnswers = {
   html: {
     question1: "Hyper Text Markup Language",
@@ -39,64 +40,15 @@ const correctAnswers = {
 
 let score = 0;
 
+// --- Get Quiz Language ---
 function getQuizLanguage() {
   const id = document.body.id;
-  if (id === "quizHTMLPage") return "html";
-  if (id === "quizCSSPage") return "css";
-  if (id === "quizJSPage") return "js";
-  return null;
+  return id.includes("HTML") ? "html" : id.includes("CSS") ? "css" : id.includes("JS") ? "js" : null;
 }
 
 const selectedLanguage = getQuizLanguage();
 
-function checkAnswer(questionNumber) {
-  const questionDiv = document.getElementById(`q${questionNumber}`);
-  const selected = questionDiv.querySelector(`input[name="question${questionNumber}"]:checked`);
-  const submitBtn = questionDiv.querySelector(".submit-btn");
-
-  if (!selected) {
-    showFeedback(questionDiv, "Please select an answer.", "orange");
-    return;
-  }
-
-  const userAnswer = selected.value;
-  const correct = correctAnswers[selectedLanguage][`question${questionNumber}`];
-  const label = questionDiv.querySelector(`label[for="${selected.id}"]`);
-
-  questionDiv.querySelectorAll("input").forEach(inp => inp.disabled = true);
-  submitBtn.disabled = true;
-
-  if (userAnswer === correct) {
-    score++;
-    showFeedback(questionDiv, "Correct!", "green");
-    label.style.backgroundColor = "#d4edda";
-    label.style.border = "2px solid green";
-  } else {
-    showFeedback(questionDiv, "Wrong!", "red");
-    label.style.backgroundColor = "#f8d7da";
-    label.style.border = "2px solid red";
-  }
-
-  if (!questionDiv.querySelector(".next-btn")) {
-    const nextBtn = document.createElement("button");
-    nextBtn.className = "next-btn";
-    nextBtn.style.marginTop = "15px";
-    nextBtn.textContent = questionNumber === 10 ? "Finish" : "Next";
-
-    nextBtn.onclick = () => {
-      if (questionNumber === 10) {
-        finishQuiz();
-      } else {
-        questionDiv.classList.remove("active");
-        document.getElementById(`q${questionNumber + 1}`).classList.add("active");
-        nextBtn.remove();
-      }
-    };
-
-    questionDiv.appendChild(nextBtn);
-  }
-}
-
+// --- Show Feedback ---
 function showFeedback(container, message, color) {
   let feedback = container.querySelector(".feedback");
   if (!feedback) {
@@ -109,59 +61,94 @@ function showFeedback(container, message, color) {
   feedback.style.color = color;
 }
 
-function finishQuiz() {
-  alert(`Quiz finished! 🎉 Your score: ${score} out of 10.`);
-  localStorage.setItem("lastScore", score);
+// --- Check Answer ---
+function checkAnswer(qNum) {
+  const qDiv = document.getElementById(`q${qNum}`);
+  const selectedInput = qDiv.querySelector(`input[name="question${qNum}"]:checked`);
+  if (!selectedInput) return showFeedback(qDiv, "Please select an answer.", "orange");
 
-  const best = localStorage.getItem("bestScore");
-  if (!best || score > Number(best)) {
-    localStorage.setItem("bestScore", score);
+  const userAnswer = selectedInput.value;
+  const correct = correctAnswers[selectedLanguage][`question${qNum}`];
+
+  // Disable inputs
+  qDiv.querySelectorAll("input").forEach(inp => inp.disabled = true);
+
+  // Feedback styling
+  qDiv.querySelectorAll("input").forEach(inp => {
+    const lbl = qDiv.querySelector(`label[for="${inp.id}"]`);
+    if (inp.value === correct) {
+      lbl.style.backgroundColor = "#d4edda";
+      lbl.style.border = "2px solid green";
+    } else if (inp.checked) {
+      lbl.style.backgroundColor = "#f8d7da";
+      lbl.style.border = "2px solid red";
+    }
+  });
+
+  if (userAnswer === correct) score++;
+  showFeedback(qDiv, userAnswer === correct ? "Correct!" : "Wrong!", userAnswer === correct ? "green" : "red");
+
+  // Next button
+  if (!qDiv.querySelector(".next-btn")) {
+    const nextBtn = document.createElement("button");
+    nextBtn.className = "next-btn";
+    nextBtn.textContent = qNum === 10 ? "Finish" : "Next";
+    nextBtn.onclick = () => {
+      if (qNum === 10) finishQuiz();
+      else {
+        qDiv.classList.remove("active");
+        document.getElementById(`q${qNum + 1}`).classList.add("active");
+        nextBtn.remove();
+      }
+    };
+    qDiv.appendChild(nextBtn);
   }
-
-  window.location.href = "greetpage.html";
 }
 
-// Attach submit button handlers
-document.querySelectorAll('.submit-btn').forEach((btn) => {
+// --- Finish Quiz ---
+function finishQuiz() {
+  localStorage.setItem("lastScore", score);
+  const best = localStorage.getItem("bestScore");
+  if (!best || score > Number(best)) localStorage.setItem("bestScore", score);
+    alert(`🎉 Quiz Finished!\nYour Score: ${score}`);
+  window.location.href = "index.html";
+}
+
+// --- Event Listeners for Submit Buttons ---
+document.querySelectorAll('.submit-btn').forEach(btn => {
   btn.onclick = () => {
-    const div = btn.closest('.question');
-    const num = parseInt(div.id.replace('q', ''));
-    checkAnswer(num);
+    const qNum = parseInt(btn.closest('.question').id.replace('q',''));
+    checkAnswer(qNum);
   };
 });
 
-// Greet page logic
-if (window.location.pathname.includes("greetpage.html")) {
+// --- Greet Page Logic ---
+if (window.location.pathname.includes("index.html")) {
   window.addEventListener("DOMContentLoaded", () => {
-    const lastScoreSpan = document.getElementById("last-score");
-    const bestScoreSpan = document.getElementById("best-score");
-    const last = localStorage.getItem("lastScore");
-    const best = localStorage.getItem("bestScore");
-
-    if (lastScoreSpan) lastScoreSpan.textContent = last ? `Last Score: ${last} / 10` : "Last Score: -";
-    if (bestScoreSpan) bestScoreSpan.textContent = best ? `Best Score: ${best} / 10` : "Best Score: -";
+    const lastScore = localStorage.getItem("lastScore") || "-";
+    const bestScore = localStorage.getItem("bestScore") || "-";
+    document.getElementById("last-score").textContent = `Last Score: ${lastScore} / 10`;
+    document.getElementById("best-score").textContent = `Best Score: ${bestScore} / 10`;
   });
 
-  // Language selection on greet page
   const langBtns = document.querySelectorAll('.language-selection button[data-lang]');
   const startBtn = document.querySelector('.start-button button');
   const selectedDiv = document.querySelector('.selected-language');
-
   let selectedLang = null;
 
   langBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       langBtns.forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
-      selectedLang = btn.getAttribute('data-lang');
+      selectedLang = btn.dataset.lang;
       localStorage.setItem('selectedLanguage', selectedLang);
       selectedDiv.textContent = `Selected language: ${selectedLang.toUpperCase()}`;
+      selectedDiv.classList.add('visible');
       startBtn.disabled = false;
     });
   });
 
   startBtn.addEventListener('click', () => {
-    if (!selectedLang) return;
-    window.location.href = `quiz-${selectedLang}.html`;
+    if (selectedLang) window.location.href = `quiz-${selectedLang}.html`;
   });
 }
